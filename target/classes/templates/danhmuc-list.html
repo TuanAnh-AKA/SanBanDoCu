@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Danh mục</h1>
+<a href="/danh-muc/them">Thêm danh mục</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Mã danh mục</th>
+        <th>Tên danh mục</th>
+        <th>Mô tả</th>
+        <th>Ngày tạo</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="dm : ${dsDanhMuc}">
+        <td th:text="${dm.id}"></td>
+        <td th:text="${dm.maDanhMuc}"></td>
+        <td th:text="${dm.tenDanhMuc}"></td>
+        <td th:text="${dm.moTa}"></td>
+        <td th:text="${dm.ngayTao}"></td>
+        <td>
+            <a th:href="@{'/danh-muc/sua/' + ${dm.id}}">Sửa</a> |
+            <a th:href="@{'/danh-muc/xoa/' + ${dm.id}}">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

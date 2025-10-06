@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý Bài Đăng</title>
+</head>
+<body>
+<h2>Danh sách Bài Đăng</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tiêu đề</th>
+        <th>Mô tả</th>
+        <th>Danh mục</th>
+        <th>Đã duyệt</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="bd : ${dsBaiDang}">
+        <td th:text="${bd.id}"></td>
+        <td th:text="${bd.tieuDe}"></td>
+        <td th:text="${bd.moTa}"></td>
+        <td th:text="${bd.danhMuc.tenDanhMuc}"></td>
+        <td th:text="${bd.daDuyet}"></td>
+        <td>
+            <a th:href="@{'/bai-dang/xoa/' + ${bd.id}}">Xóa</a>
+            <a th:href="@{'/bai-dang/sua/' + ${bd.id}}">Sửa</a>
+        </td>
+    </tr>
+</table>
+
+<h2>Thêm bài đăng</h2>
+<form th:action="@{/bai-dang/luu}" method="post" th:object="${baiDang}">
+    <input type="hidden" th:field="*{id}"/>
+    Tiêu đề: <input type="text" th:field="*{tieuDe}"/><br/>
+    Mô tả: <input type="text" th:field="*{moTa}"/><br/>
+    Danh mục:
+    <select th:field="*{danhMuc.id}">
+        <option th:each="dm : ${dsDanhMuc}"
+                th:value="${dm.id}"
+                th:text="${dm.tenDanhMuc}">
+        </option>
+    </select><br/>
+    Đã duyệt: <input type="checkbox" th:field="*{daDuyet}"/><br/>
+    <button type="submit">Lưu</button>
+</form>
+</body>
+</html>
